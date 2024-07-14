@@ -1,0 +1,339 @@
+    
+.video-container {
+    margin-top: 10px;
+    margin-left: 50px;
+    position: relative;
+    width: 60%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    margin-inline: left;
+    background: black;
+}
+
+.play-icon-container {
+    display: none;
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5rem; 
+    z-index: 10; 
+   
+  }
+
+.video-container .theater,
+.video-container.fullscreen {
+    max-width: initial;
+    width: 100%;
+}
+
+.video-container .theater {
+    max-height: 90vh;
+}
+
+.video-container .fullscreen {
+    max-height: 100vh;
+}
+
+.video {
+    width: 100%;
+}
+
+/* Video controls container */
+.video-controls-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    opacity: 0.3s;
+    transition: opacity 150ms ease-in-out;
+    color: white;
+
+}
+
+.video-controls-container::before {
+    content: "";
+    background: linear-gradient(to top, rgba(0, 0, 0, .75), transparent);
+    position: absolute;
+    bottom: 0;
+    aspect-ratio: 6 / 1;
+    width: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.video-container:hover .video-controls-container,
+.video-container:focus-within .video-controls-container,
+.video-container.paused .video-controls-container {
+   
+ opacity: 1;
+}
+
+
+
+/* Video control buttons */
+.video-controls-container .controls {
+    display: flex;
+    gap: 1rem;
+    padding: .25em;
+    align-items: center;
+}
+
+.video-controls-container .controls button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: .50;
+    transition: opacity 150ms ease-in-out;
+}
+
+.video-controls-container .controls button:hover {
+    opacity: 1;
+}
+
+/* Hide play or pause icons based on video state */
+.video-container.paused .pause-icon {
+    display: none;
+}
+
+.video-container:not(.paused) .play-icon {
+    display: none;
+}
+
+.volume-containeer .material-symbols-outlined.volume-up,
+.volume-containeer .material-symbols-outlined.volume-down,
+.volume-containeer .material-symbols-outlined.volume-mute {
+    display: none;
+}
+.video-container[data-volume-level="up"] .volume-up{
+    display: block;
+
+}
+.video-container[data-volume-level="down"] .volume-down{
+    display: block;
+    
+}
+.video-container[data-volume-level="mute"] .volume-mute{
+    display: block;
+    
+}
+
+.volume-containeer{
+    display: flex;
+    align-items: center;
+    
+}
+
+.volume-slider{
+    width:0;
+    transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+    transform:scaleX(0);
+    transform-origin: left;
+
+
+}
+
+.volume-containeer:hover .volume-slider,.volume-slider:focus-within {
+
+    width: 100px;
+    transform:scaleX(1);
+    
+
+}
+
+.duration-containeer{
+    display: flex;
+    align-items: center;
+    gap: .25em;
+    flex-grow: 1;
+
+
+}
+
+
+
+.video-container .video-controls-container .controls button.speed-wide-btn{
+width: 10%;
+
+   
+}
+
+
+
+.video-container .video-controls-container .controls button .fullscreen-btn{
+   
+}
+
+
+
+
+
+.timeline-container {
+    width: 100%;
+  }
+  .timeline-container :hover{
+    height: 5px;
+  }
+  
+  .timeline {
+    position: relative;
+    height: 2px;
+    background: #333;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  
+  .progress-bar {
+    position: absolute;
+    height: 100%;
+    background: red;
+    z-index: 0;
+  }
+ 
+  
+  .thumb-indicator {
+    position: absolute;
+    height: 10px;
+    width: 20px;
+    margin-left: -20px;
+    top: -10px;
+    background: rgba(255, 255, 255, 0.7);
+    color: black;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 20px;
+    z-index: 1;
+  }
+
+.settings-menu {
+    position: absolute;
+    background: #1c1c1c; 
+    color: #fff; 
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); 
+    bottom: 100%; 
+    right: 40px; 
+    z-index: 1000; 
+    min-width: 220px; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(10px); 
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; 
+  }
+  
+  /* Settings menu open state */
+  .settings-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Menu slides up into view */
+  }
+  
+  /* Settings menu closed state */
+  .settings-menu.closed {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* Menu slides down out of view */
+  }
+  
+  /* Settings menu individual setting items */
+  .settings-menu > div {
+    margin-bottom: 15px; /* Space between each setting */
+  }
+  
+  /* Settings menu labels */
+  .settings-menu label {
+    display: block;
+    margin-bottom: 5px; /* Space between label and select */
+    font-size: 14px; /* Font size for labels */
+    color: #bbb; /* Light color for labels */
+  }
+  
+  /* Settings menu select dropdown */
+  .settings-menu select {
+    background: #2a2a2a; /* Dark background for the dropdown */
+    color: #fff; /* Text color */
+    border: 1px solid #555; /* Border around the dropdown */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px;
+    width: 100%; /* Full width of the menu */
+    font-size: 14px; /* Font size for options */
+    cursor: pointer; /* Pointer cursor for dropdown */
+  }
+  
+  /* Space between dropdowns */
+  .settings-menu select + label {
+    margin-top: 10px; /* Add space above the label */
+  }
+  
+  /* Dropdown options */
+  .settings-menu select option {
+    background: #2a2a2a; /* Dark background for dropdown options */
+    color: #fff; /* Text color */
+  }
+  
+  /* Add a subtle hover effect to the menu */
+  .settings-menu select:hover {
+    background: #333; /* Darker background on hover */
+    border-color: #777; /* Change border color on hover */
+  }
+  
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  
+  #settingsButton {
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+
+    background-color: #0056b3;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+   
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
